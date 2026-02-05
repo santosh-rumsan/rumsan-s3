@@ -1,0 +1,28 @@
+# Development Dockerfile with hot reload support
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install additional tools for development
+RUN apk add --no-cache \
+    git \
+    curl \
+    wget \
+    bash
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Install all dependencies (including dev)
+RUN npm ci
+
+# Copy source code
+COPY src ./src
+
+# Expose port
+EXPOSE 4568
+
+# Development command with hot reload
+CMD ["npm", "run", "dev"]

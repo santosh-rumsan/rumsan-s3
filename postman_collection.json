@@ -1,0 +1,187 @@
+{
+  "info": {
+    "name": "S3-Compatible File Servers",
+    "description": "Collection for testing the S3-compatible file server API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Buckets",
+      "item": [
+        {
+          "name": "List Buckets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets"]
+            }
+          }
+        },
+        {
+          "name": "Create Bucket",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Bucket",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Objects",
+      "item": [
+        {
+          "name": "List Objects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects"]
+            }
+          }
+        },
+        {
+          "name": "List Objects with Prefix",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects?prefix=documents/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects"],
+              "query": [
+                {
+                  "key": "prefix",
+                  "value": "documents/"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upload Text File",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello World! This is a test file."
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects/test.txt",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects", "test.txt"]
+            }
+          }
+        },
+        {
+          "name": "Upload JSON File",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test\",\n  \"value\": 123\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects/data/config.json",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects", "data", "config.json"]
+            }
+          }
+        },
+        {
+          "name": "Download File",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects/test.txt",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects", "test.txt"]
+            }
+          }
+        },
+        {
+          "name": "Get Object Metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects/test.txt/head",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects", "test.txt", "head"]
+            }
+          }
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/{{bucketName}}/objects/test.txt",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", "{{bucketName}}", "objects", "test.txt"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4568",
+      "type": "string"
+    },
+    {
+      "key": "bucketName",
+      "value": "my-bucket",
+      "type": "string"
+    }
+  ]
+}

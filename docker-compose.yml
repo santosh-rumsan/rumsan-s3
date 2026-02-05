@@ -1,0 +1,27 @@
+services:
+  s3server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rumsan/s3server:latest
+    container_name: rumsan-s3-server
+    ports:
+      - "${PORT:-4568}:4568"
+    environment:
+      - NODE_ENV=production
+      - PORT=4568
+      - HOST=0.0.0.0
+      - STORAGE_PATH=/app/storage
+    volumes:
+      - s3_storage:/app/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4568/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  s3_storage:
+    driver: local

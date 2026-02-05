@@ -1,0 +1,54 @@
+services:
+  # Development server with hot reload
+  s3server-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - NODE_ENV=development
+    image: rumsan/s3server:dev
+    container_name: rumsan-s3-dev
+    ports:
+      - "${PORT:-4568}:4568"
+    environment:
+      - NODE_ENV=development
+      - PORT=4568
+      - HOST=0.0.0.0
+      - STORAGE_PATH=/app/storage
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+      - s3_storage_dev:/app/storage
+    restart: unless-stopped
+    command: npm run dev
+
+  # Production server
+  s3server-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rumsan/s3server:latest
+    container_name: rumsan-s3-prod
+    ports:
+      - "4569:4568"
+    environment:
+      - NODE_ENV=production
+      - PORT=4568
+      - HOST=0.0.0.0
+      - STORAGE_PATH=/app/storage
+    volumes:
+      - s3_storage_prod:/app/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4568/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  s3_storage_dev:
+    driver: local
+  s3_storage_prod:
+    driver: local
