@@ -1,0 +1,4 @@
+name: dev-tools
+variables:
+  - name: url
+    value: https://s3.rumsan.us

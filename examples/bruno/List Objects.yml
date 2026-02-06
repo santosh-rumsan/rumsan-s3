@@ -1,0 +1,15 @@
+info:
+  name: List Objects
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: "{{url}}/api/buckets/test-bucket/objects"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -13,7 +13,7 @@ npm run dev
 
 ### Create a bucket
 ```bash
-curl -X PUT http://localhost:4568/api/buckets/my-test-bucket
+curl -X PUT http://localhost:4568/api/buckets/test-bucket
 ```
 
 ### List buckets
@@ -23,41 +23,41 @@ curl http://localhost:4568/api/buckets
 
 ### Upload a file
 ```bash
-curl -X PUT http://localhost:4568/api/buckets/my-test-bucket/objects/test.txt \
+curl -X PUT http://localhost:4568/api/buckets/test-bucket/objects/test.txt \
   -H "Content-Type: text/plain" \
   -d "Hello World!"
 ```
 
 ### Upload a file in a folder
 ```bash
-curl -X PUT http://localhost:4568/api/buckets/my-test-bucket/objects/docs/readme.txt \
+curl -X PUT http://localhost:4568/api/buckets/test-bucket/objects/docs/readme.txt \
   -H "Content-Type: text/plain" \
   -d "Documentation file"
 ```
 
 ### List objects
 ```bash
-curl http://localhost:4568/api/buckets/my-test-bucket/objects
+curl http://localhost:4568/api/buckets/test-bucket/objects
 ```
 
 ### List objects with prefix
 ```bash
-curl "http://localhost:4568/api/buckets/my-test-bucket/objects?prefix=docs/"
+curl "http://localhost:4568/api/buckets/test-bucket/objects?prefix=docs/"
 ```
 
 ### Download a file
 ```bash
-curl http://localhost:4568/api/buckets/my-test-bucket/objects/test.txt
+curl http://localhost:4568/api/buckets/test-bucket/objects/test.txt
 ```
 
 ### Delete a file
 ```bash
-curl -X DELETE http://localhost:4568/api/buckets/my-test-bucket/objects/test.txt
+curl -X DELETE http://localhost:4568/api/buckets/test-bucket/objects/test.txt
 ```
 
 ### Delete a bucket
 ```bash
-curl -X DELETE http://localhost:4568/api/buckets/my-test-bucket
+curl -X DELETE http://localhost:4568/api/buckets/test-bucket
 ```
 
 ## 2. Testing with Swagger UI

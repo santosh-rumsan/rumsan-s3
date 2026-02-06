@@ -1,0 +1,21 @@
+info:
+  name: File Add
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{url}}/api/buckets/test-bucket/objects/test.txt"
+  headers:
+    - name: Content-Type
+      value: text/plain
+  body:
+    type: text
+    data: Nice body
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

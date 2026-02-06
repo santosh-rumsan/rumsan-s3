@@ -1,0 +1,21 @@
+info:
+  name: Upload File
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{url}}/api/buckets/test-bucket/objects/test.txt"
+  headers:
+    - name: Content-Type
+      value: text/plain
+  body:
+    type: text
+    data: Hello World!
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

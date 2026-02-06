@@ -15,7 +15,7 @@ async function main() {
   try {
     console.log('🚀 Testing S3-Compatible File Server\n');
 
-    const bucketName = 'my-test-bucket-' + Date.now();
+    const bucketName = 'test-bucket-' + Date.now();
 
     // 1. Create a bucket
     console.log(`1. Creating bucket "${bucketName}"...`);
